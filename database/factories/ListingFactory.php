@@ -17,7 +17,7 @@ class ListingFactory extends Factory
     public function definition(): array
     {
         return [
-            'beds' => fake()->numberBetween(1, 7),
+            'beds' => fake()->numberBetween(1, 8),
             'baths' => fake()->numberBetween(1, 4),
             'area' => fake()->numberBetween(10, 200),
             'city' => fake()->city(),
