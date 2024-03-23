@@ -24,9 +24,16 @@ class ListingController extends Controller
 
     public function edit(Listing $listing)
     {
-        return inertia('Listing/Show', [
+        return inertia('Listing/Edit', [
             'listing' => $listing
         ]);
+    }
+
+    public function update(Request $request, Listing $listing)
+    {
+        $listing->update($request->validate(Listing::getValidations()));
+
+        return redirect()->route('listing.index')->with('success', 'Listing was changed');
     }
 
 
@@ -42,11 +49,16 @@ class ListingController extends Controller
     /**
      * Display the specified listing
      */
-    //using route model binding
     public function show(Listing $listing)
     {
         return inertia('Listing/Show', [
             'listing' => $listing
         ]);
+    }
+
+    public function destroy(Listing $listing)
+    {
+        $listing->delete();
+        return redirect()->back()->with('success', 'Listing was deleted');
     }
 }
