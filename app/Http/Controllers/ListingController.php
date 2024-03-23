@@ -22,9 +22,19 @@ class ListingController extends Controller
         return inertia('Listing/Create');
     }
 
+    public function edit(Listing $listing)
+    {
+        return inertia('Listing/Show', [
+            'listing' => $listing
+        ]);
+    }
+
+
     public function store(Request $request)
     {
-        Listing::create($request->all());
+        Listing::create([
+            $request->validate(Listing::getValidations()),
+        ]);
 
         return redirect()->route('listing.index')->with('success', 'Listing was created');
     }
