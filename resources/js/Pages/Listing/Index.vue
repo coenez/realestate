@@ -23,6 +23,7 @@ import ListingAddress from "../../Component/ListingAddress.vue";
 import Box from "../../Component/UI/Box.vue";
 import ListingSpace from "../../Component/ListingSpace.vue";
 import Price from "../../Component/Price.vue";
+
 defineProps({
     listings: Array
 });
