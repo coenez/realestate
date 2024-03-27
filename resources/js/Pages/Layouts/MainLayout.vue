@@ -9,7 +9,7 @@
                     <Link :href="route('listing.index')">Real estate course</Link>&nbsp;
                 </div>
                 <div>
-                    <Link :href="route('listing.create')" class="bg-indigo-600 hover:bg-indigo-500 text-white font-medium p-2 rounded-md">+ New Listing</Link>&nbsp;
+                    <Link :href="route('listing.create')" class="button">+ New Listing</Link>&nbsp;
                 </div>
             </nav>
         </div>
