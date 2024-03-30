@@ -1,3 +1,11 @@
+<script setup>
+
+import {Link, usePage} from '@inertiajs/vue3'
+import {computed} from 'vue'
+
+const flashSuccess = computed(() => usePage().props.flash?.success)
+</script>
+
 <template>
     <header class="border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 w-full">
         <div class="container mx-auto">
@@ -23,10 +31,4 @@
 
 </template>
 
-<script setup>
 
-import {Link, usePage} from '@inertiajs/vue3'
-import {computed} from 'vue'
-
-const flashSuccess = computed(() => usePage().props.flash?.success)
-</script>

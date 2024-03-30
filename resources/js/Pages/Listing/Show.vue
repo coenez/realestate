@@ -1,3 +1,22 @@
+<script setup>
+import ListingSpace from "../../Component/ListingSpace.vue";
+import Price from "../../Component/Price.vue";
+import ListingAddress from "../../Component/ListingAddress.vue";
+import Box from "../../Component/UI/Box.vue";
+import {ref} from 'vue';
+import {useMonthlyPayment} from "../../Composables/useMonthlyPayment.js";
+
+const interestRate = ref(2.5);
+const duration = ref(25);
+
+const props = defineProps({
+    listing: Object
+});
+
+const monthlyPayment = useMonthlyPayment(props.listing.price, interestRate, duration);
+
+</script>
+
 <template>
     <div class="flex flex-col-reverse md:grid md:grid-cols-12 gap-4">
         <Box class="md:col-span-7 flex items-center w-full">
@@ -28,22 +47,3 @@
         </div>
     </div>
 </template>
-
-<script setup>
-import ListingSpace from "../../Component/ListingSpace.vue";
-import Price from "../../Component/Price.vue";
-import ListingAddress from "../../Component/ListingAddress.vue";
-import Box from "../../Component/UI/Box.vue";
-import {ref} from 'vue';
-import {useMonthlyPayment} from "../../Composables/useMonthlyPayment.js";
-
-const interestRate = ref(2.5);
-const duration = ref(25);
-
-const props = defineProps({
-    listing: Object
-});
-
-const monthlyPayment = useMonthlyPayment(props.listing.price, interestRate, duration);
-
-</script>

@@ -1,7 +1,3 @@
-<template>
-    <span>{{formattedPrice}}</span>
-</template>
-
 <script setup>
 import {computed} from 'vue'
 
@@ -17,3 +13,9 @@ const formattedPrice = computed(
     })
 );
 </script>
+
+<template>
+    <span>{{formattedPrice}}</span>
+</template>
+
+

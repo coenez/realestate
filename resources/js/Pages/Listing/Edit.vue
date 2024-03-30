@@ -1,3 +1,15 @@
+<script setup>
+import {useForm} from '@inertiajs/vue3'
+
+const props = defineProps({
+    listing: Object
+})
+
+const form = useForm(props.listing);
+
+const update = () => form.put(route('listing.update', {listing: props.listing.id}));
+</script>
+
 <template>
     <form @submit.prevent="update">
         <div class="grid grid-cols-6 gap-4">
@@ -56,24 +68,4 @@
     </form>
 </template>
 
-<script setup>
-import {useForm} from '@inertiajs/vue3'
 
-const props = defineProps({
-    listing: Object
-})
-
-const form = useForm(props.listing);
-
-const update = () => form.put(route('listing.update', {listing: props.listing.id}));
-</script>
-
-<style scoped>
-label {
-    margin-right: 2em;
-}
-
-div {
-    padding: 2px
-}
-</style>

@@ -1,3 +1,9 @@
+<script setup>
+defineProps({
+    listing: Object
+});
+</script>
+
 <template>
     <div>
         <span class="font-bold">{{listing.beds}}</span> beds <span class="text-gray-400">| </span>
@@ -6,8 +12,4 @@
     </div>
 </template>
 
-<script setup>
-defineProps({
-    listing: Object
-});
-</script>
+
