@@ -17,12 +17,15 @@ const flashSuccess = computed(() => usePage().props.flash?.success)
                     <Link :href="route('listing.index')">Real estate course</Link>&nbsp;
                 </div>
                 <div>
+                    <Link :href="route('login')" class="button">Login</Link>&nbsp;
+                </div>
+                <div>
                     <Link :href="route('listing.create')" class="button">+ New Listing</Link>&nbsp;
                 </div>
             </nav>
         </div>
     </header>
-    <main class="container mx-auto p-4">
+    <main class="container mx-auto p-4 w-full">
         <div v-if="flashSuccess" class="mb-4 border rounded-md shadow-sm border-green-300 dark:border-green-800 bg-green-100 dark:bg-green-900 p2">
             {{ flashSuccess }}
         </div>
