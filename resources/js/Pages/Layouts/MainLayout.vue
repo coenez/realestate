@@ -4,6 +4,8 @@ import {Link, usePage} from '@inertiajs/vue3'
 import {computed} from 'vue'
 
 const flashSuccess = computed(() => usePage().props.flash?.success)
+const user = computed(() => usePage().props.user);
+
 </script>
 
 <template>
@@ -16,11 +18,16 @@ const flashSuccess = computed(() => usePage().props.flash?.success)
                 <div class="text-xl text-indigo-600 dark:text-indigo-300 font-bold text-center">
                     <Link :href="route('listing.index')">Real estate course</Link>&nbsp;
                 </div>
-                <div>
-                    <Link :href="route('login')" class="button">Login</Link>&nbsp;
-                </div>
-                <div>
+
+                <div class="flex items-center gap-4" v-if="user">
+                    <div class="text-sm text-gray-500">{{user.name}}</div>
                     <Link :href="route('listing.create')" class="button">+ New Listing</Link>&nbsp;
+                    <div>
+                        <Link :href="route('logout')" method="delete" as="button" class="button">Logout</Link>&nbsp;
+                    </div>
+                </div>
+                <div v-else>
+                    <Link :href="route('login')" class="button">Sign-in</Link>&nbsp;
                 </div>
             </nav>
         </div>
