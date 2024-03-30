@@ -13,15 +13,15 @@
             <Box>
                 <template #header>Monthly Payment</template>
                 <div>
-                    <label class="label">Interest rate (2.5%)</label>
-                    <input type="range" min="0.1" max="30" step="0.1" class="slider" />
+                    <label class="label">Interest rate ({{ interestRate }}%)</label>
+                    <input v-model.number="interestRate" type="range" min="0.1" max="30" step="0.1" class="slider" />
 
-                    <label class="label">Duration (25 years)</label>
-                    <input type="range" min="3" max="35" step="1" class="slider" />
+                    <label class="label">Duration ({{ duration }} years)</label>
+                    <input v-model.number="duration" type="range" min="3" max="35" step="1" class="slider" />
 
                     <div class="text-gray-600 dark:text-gray-300 mt-2">
                         <div class="text-gray-400">Your monthly payment</div>
-                        <Price :price="500" class="text-3xl" />
+                        <Price :price="monthlyPayment" class="text-3xl" />
                     </div>
                 </div>
             </Box>
@@ -34,9 +34,16 @@ import ListingSpace from "../../Component/ListingSpace.vue";
 import Price from "../../Component/Price.vue";
 import ListingAddress from "../../Component/ListingAddress.vue";
 import Box from "../../Component/UI/Box.vue";
+import {ref} from 'vue';
+import {useMonthlyPayment} from "../../Composables/useMonthlyPayment.js";
 
-defineProps({
+const interestRate = ref(2.5);
+const duration = ref(25);
+
+const props = defineProps({
     listing: Object
-})
+});
+
+const monthlyPayment = useMonthlyPayment(props.listing.price, interestRate, duration);
 
 </script>
