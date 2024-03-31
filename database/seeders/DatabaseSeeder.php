@@ -18,8 +18,16 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com'
 
         ]);
-        Listing::factory(20)->create([
+        User::factory()->create([
+            'name' => 'Test user2',
+            'email' => 'test2@example.com'
+
+        ]);
+        Listing::factory(10)->create([
             'user_id' => 1
+        ]);
+        Listing::factory(10)->create([
+            'user_id' => 2
         ]);
     }
 }
