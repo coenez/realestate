@@ -21,9 +21,7 @@ class UserAccountController extends Controller
             'password' => 'required|min:8|confirmed',
         ];
 
-        $user = User::make($request->validate($toValidate));
-        $user->password = Hash::make($user->password);
-        $user->save();
+        $user = User::create($request->validate($toValidate));
 
         Auth::login($user);
 
