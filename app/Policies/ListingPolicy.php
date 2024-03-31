@@ -9,6 +9,17 @@ use Illuminate\Auth\Access\Response;
 class ListingPolicy
 {
     /**
+     * Overrule all policies if user is admin
+     * @param User|null $user
+     * @return true|void
+     */
+    public function before(?User $user)
+    {
+        if ($user?->is_admin) {
+            return true;
+        }
+    }
+    /**
      * Determine whether the user can view any models.
      */
     public function viewAny(?User $user): bool
