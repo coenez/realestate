@@ -35,7 +35,7 @@ class ListingController extends Controller
 
     public function update(Request $request, Listing $listing)
     {
-        $listing->update($request->validate(Listing::getValidations()));
+        $listing->update($request->validate(Listing::VALIDATIONS));
 
         return redirect()->route('listing.index')->with('success', 'Listing was changed');
     }
@@ -44,7 +44,7 @@ class ListingController extends Controller
     public function store(Request $request)
     {
         Listing::create([
-            $request->validate(Listing::getValidations()),
+            $request->validate(Listing::VALIDATIONS),
         ]);
 
         return redirect()->route('listing.index')->with('success', 'Listing was created');
