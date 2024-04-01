@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Builder;
 
 class Listing extends Model
 {
@@ -25,8 +26,36 @@ class Listing extends Model
         'price' => 'required|integer|min:1|max:20000000',
     ];
 
+    public const FILTERS = [
+        'priceFrom' => ['>=', 'price'],
+        'priceTo' => ['<=', 'price'],
+        'beds' => ['=', 'beds'],
+        'baths' => ['=', 'baths'],
+        'areaFrom' => ['>=', 'areaFrom'],
+        'areaTo' => ['<=', 'areaTo'],
+    ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function scopeFiltered(Builder $query, array $filters): Builder
+    {
+        foreach(self::FILTERS as $filterName => $properties) {
+            list($operator, $field) = $properties;
+
+            $query->when(
+                $filters[$filterName] ?? false,
+                static function($query, $value) use($field, $operator) {
+                    //handle 6+ value with correct operator
+                    if (in_array($field, ['beds', 'baths']) && (int)$value === 6) {
+                        $operator = '>=';
+                    }
+                    $query->where($field, $operator, $value);
+                });
+
+        }
+        return $query;
     }
 }
