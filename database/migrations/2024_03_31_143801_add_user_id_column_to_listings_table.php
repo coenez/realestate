@@ -23,7 +23,6 @@ return new class extends Migration
     {
         Schema::table('listings', function (Blueprint $table) {
             $table->dropForeignIdFor(\App\Models\User::class, 'user_id');
-//            $table->dropColumn('user_id');
         });
     }
 };

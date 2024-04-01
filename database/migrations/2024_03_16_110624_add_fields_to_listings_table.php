@@ -22,6 +22,7 @@ return new class extends Migration
             $table->tinyText('street_nr');
 
             $table->unsignedInteger('price');
+            $table->softDeletes();
         });
     }
 
@@ -32,6 +33,7 @@ return new class extends Migration
     {
         Schema::table('listings', function (Blueprint $table) {
             $table->dropColumn(['beds', 'baths', 'area', 'city', 'code', 'street', 'street_nr', 'price']);
+            $table->dropSoftDeletes();
         });
     }
 };
