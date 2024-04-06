@@ -42,6 +42,8 @@ class Listing extends Model
         'created_at'
     ];
 
+    public const PAGE_SIZE = 10;
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
@@ -68,7 +70,8 @@ class Listing extends Model
             );
         }
         if (isset($sorter['by']) && in_array($sorter['by'], self::SORTERS)) {
-            $query->orderBy($sorter['by'], $sorter['order'] ?? 'desc');
+            $direction = isset($sorter['order']) && in_array($sorter['order'], ['asc', 'desc'], true) ? $sorter['order'] : 'asc';
+            $query->orderBy($sorter['by'], $direction);
         }
         return $query;
     }

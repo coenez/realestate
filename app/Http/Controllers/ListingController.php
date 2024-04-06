@@ -23,7 +23,7 @@ class ListingController extends Controller
             'filters' => $filters,
             'listings' => Listing::latest()
                 ->filtered($filters)
-                ->paginate(10)
+                ->paginate(Listing::PAGE_SIZE)
                 ->withQueryString(),
         ]);
     }
