@@ -37,12 +37,17 @@ class Listing extends Model
         'deleted' => ['=', 'deleted_at'],
     ];
 
+    protected const SORTERS = [
+        'price',
+        'created_at'
+    ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function scopeFiltered(Builder $query, array $filters): Builder
+    public function scopeFiltered(Builder $query, array $filters, array $sorter): Builder
     {
         foreach(self::FILTERS as $filterName => $properties) {
             list($operator, $field) = $properties;
@@ -61,6 +66,9 @@ class Listing extends Model
                     }
                 }
             );
+        }
+        if (isset($sorter['by']) && in_array($sorter['by'], self::SORTERS)) {
+            $query->orderBy($sorter['by'], $sorter['order'] ?? 'desc');
         }
         return $query;
     }
