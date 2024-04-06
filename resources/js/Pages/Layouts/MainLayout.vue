@@ -21,7 +21,7 @@ const user = computed(() => usePage().props.user);
 
                 <div class="flex items-center gap-4" v-if="user">
                     <Link :href="route('realtor.listing.index')" class="text-sm text-gray-500">{{user.name}}</Link>
-                    <Link :href="route('listing.create')" class="button">+ New Listing</Link>&nbsp;
+                    <Link :href="route('realtor.listing.create')" class="button">+ New Listing</Link>&nbsp;
                     <div>
                         <Link :href="route('logout')" method="delete" as="button" class="button">Logout</Link>&nbsp;
                     </div>

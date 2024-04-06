@@ -49,7 +49,7 @@ class Listing extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function scopeFiltered(Builder $query, array $filters, array $sorter): Builder
+    public function scopeFiltered(Builder $query, array $filters, array $sorter = []): Builder
     {
         foreach(self::FILTERS as $filterName => $properties) {
             list($operator, $field) = $properties;

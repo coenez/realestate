@@ -8,9 +8,6 @@ use Illuminate\Support\Facades\Auth;
 
 class RealtorListingController extends Controller
 {
-    public function __construct() {
-        $this->authorizeResource(Listing::class, 'listing');
-    }
 
     public function index(Request $request)
     {
@@ -27,6 +24,33 @@ class RealtorListingController extends Controller
                 ->paginate(Listing::PAGE_SIZE)
                 ->withQueryString()
         ]);
+    }
+
+    public function create()
+    {
+        return inertia('Realtor/Create');
+    }
+
+
+    public function store(Request $request)
+    {
+        $request->user()->listings()->create($request->validate(Listing::VALIDATIONS));
+
+        return redirect()->route('realtor.listing.index')->with('success', 'Listing was created');
+    }
+
+    public function edit(Listing $listing)
+    {
+        return inertia('Realtor/Edit', [
+            'listing' => $listing
+        ]);
+    }
+
+    public function update(Request $request, Listing $listing)
+    {
+        $request->user()->listings()->update($request->validate(Listing::VALIDATIONS));
+
+        return redirect()->route('realtor.listing.index')->with('success', 'Listing was changed');
     }
 
     public function destroy(Listing $listing)

@@ -28,33 +28,6 @@ class ListingController extends Controller
         ]);
     }
 
-    public function create()
-    {
-        return inertia('Listing/Create');
-    }
-
-    public function edit(Listing $listing)
-    {
-        return inertia('Listing/Edit', [
-            'listing' => $listing
-        ]);
-    }
-
-    public function update(Request $request, Listing $listing)
-    {
-        $request->user()->listings()->update($request->validate(Listing::VALIDATIONS));
-
-        return redirect()->route('listing.index')->with('success', 'Listing was changed');
-    }
-
-
-    public function store(Request $request)
-    {
-        $request->user()->listings()->create($request->validate(Listing::VALIDATIONS));
-
-        return redirect()->route('listing.index')->with('success', 'Listing was created');
-    }
-
     /**
      * Display the specified listing
      */
