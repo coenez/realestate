@@ -34,6 +34,7 @@ class Listing extends Model
         'baths' => ['=', 'baths'],
         'areaFrom' => ['>=', 'areaFrom'],
         'areaTo' => ['<=', 'areaTo'],
+        'deleted' => ['=', 'deleted_at'],
     ];
 
     public function user(): BelongsTo
@@ -53,9 +54,13 @@ class Listing extends Model
                     if (in_array($field, ['beds', 'baths']) && (int)$value === 6) {
                         $operator = '>=';
                     }
-                    $query->where($field, $operator, $value);
-                });
-
+                    if ($field === 'deleted_at') {
+                        $query->withTrashed();
+                    } else {
+                        $query->where($field, $operator, $value);
+                    }
+                }
+            );
         }
         return $query;
     }
