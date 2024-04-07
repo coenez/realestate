@@ -34,7 +34,7 @@ const user = computed(() => usePage().props.user);
         </div>
     </header>
     <main class="container mx-auto p-4 w-full">
-        <div v-if="flashSuccess" class="mb-4 border rounded-md shadow-sm border-green-300 dark:border-green-800 bg-green-100 dark:bg-green-900 p4">
+        <div v-if="flashSuccess" class="mb-4 border rounded-md shadow-sm border-green-300 dark:border-green-800 bg-green-100 dark:bg-green-900 p-4">
             {{ flashSuccess }}
         </div>
         <slot></slot>
