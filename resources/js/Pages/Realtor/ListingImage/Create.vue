@@ -2,6 +2,7 @@
     import Box from "../../../Component/UI/Box.vue";
     import {useForm} from '@inertiajs/vue3'
     import {computed} from "vue";
+    import {Link} from "@inertiajs/vue3";
 
     const props = defineProps({listing: Object});
 
@@ -44,8 +45,9 @@
     <Box v-if="listing.images.length" class="mt-4">
         <template #header>Current listing images</template>
         <section class="mt-4 grid grid-cols-3 gap-4">
-            <div class="flex items-center gap-2 my-4" v-for="image in listing.images" :key="image.id">
+            <div class="flex flex-col justify-between" v-for="image in listing.images" :key="image.id">
                 <img :alt="image.filename" :src="image.src" class="rounded-md"/>
+                <Link method="delete" as="button" :href="route('realtor.listing.image.destroy', {listing: listing.id, image: image.id})" class="mt-2 btn-outline text-xs">Delete</Link>
             </div>
         </section>
 
