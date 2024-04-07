@@ -17,6 +17,8 @@ class RealtorListingImageController extends Controller
 
     public function store(Listing $listing, Request $request)
     {
+        $request->validate(...ListingImage::VALIDATIONS);
+
         if ($request->hasFile('images')) {
             foreach($request->file('images') as $file) {
                 $path = $file->store('images', 'public');

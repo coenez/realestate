@@ -5,11 +5,15 @@
     import {Link} from "@inertiajs/vue3";
     import ListingAddress from "../../../Component/ListingAddress.vue";
 
-    const props = defineProps({listing: Object});
+    const props = defineProps({
+        listing: Object,
+    });
 
     const form = useForm({
         images: []
     });
+
+    const imageErrors = computed(() => Object.values(form.errors));
 
     const uploadAvailable = computed(() => form.images.length);
 
@@ -41,6 +45,9 @@
                 <button :disabled="!uploadAvailable" type="submit" class="btn-outline disabled:opacity-25 disabled:cursor-not-allowed">Upload</button>
                 <button type="reset" class="btn-outline" @click="reset">Reset</button>
             </section>
+            <div v-if="imageErrors.length" class="inputError">
+                <div v-for="(error, index) in imageErrors" :key="index">{{error}}</div>
+            </div>
         </form>
     </Box>
     <Box v-if="listing.images.length" class="mt-4">
