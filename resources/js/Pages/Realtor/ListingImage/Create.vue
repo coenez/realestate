@@ -41,4 +41,13 @@
             </section>
         </form>
     </Box>
+    <Box v-if="listing.images.length" class="mt-4">
+        <template #header>Current listing images</template>
+        <section class="mt-4 grid grid-cols-3 gap-4">
+            <div class="flex items-center gap-2 my-4" v-for="image in listing.images" :key="image.id">
+                <img :alt="image.filename" :src="image.src" class="rounded-md"/>
+            </div>
+        </section>
+
+    </Box>
 </template>
