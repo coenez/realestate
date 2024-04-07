@@ -21,6 +21,7 @@ class RealtorListingController extends Controller
             'sorter' => $sorter,
             'listings' => Auth::user()->listings()
                 ->filtered($filters, $sorter)
+                ->withCount('images')
                 ->paginate(Listing::PAGE_SIZE)
                 ->withQueryString()
         ]);

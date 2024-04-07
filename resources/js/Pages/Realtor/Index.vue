@@ -38,7 +38,7 @@ defineProps({
                         <Link v-else :href="route('realtor.listing.restore', {listing: listing.id})" as="button" method="put" class="btn-outline text-xs font-medium">Restore</Link>
                     </div>
                     <div class="mt-2">
-                        <Link v-if="!listing.deleted_at" :href="route('realtor.listing.image.create', {listing: listing.id})" class="block w-full btn-outline text-xs font-medium text-center">Images</Link>
+                        <Link v-if="!listing.deleted_at" :href="route('realtor.listing.image.create', {listing: listing.id})" class="block w-full btn-outline text-xs font-medium text-center">Images ({{listing.images_count}})</Link>
                     </div>
                 </section>
             </div>
