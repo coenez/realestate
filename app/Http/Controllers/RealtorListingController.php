@@ -22,9 +22,15 @@ class RealtorListingController extends Controller
             'listings' => Auth::user()->listings()
                 ->filtered($filters, $sorter)
                 ->withCount('images')
+                ->withCount('offers')
                 ->paginate(Listing::PAGE_SIZE)
                 ->withQueryString()
         ]);
+    }
+
+    public function show(Listing $listing)
+    {
+        return inertia('Realtor/Show', ['listing' => $listing->load('offers')]);
     }
 
     public function create()

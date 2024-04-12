@@ -39,10 +39,10 @@ defineProps({
                     </div>
                     <div class="mt-2">
                         <Link v-if="!listing.deleted_at" :href="route('realtor.listing.image.create', {listing: listing.id})" class="block w-full btn-outline text-xs font-medium text-center">Images ({{listing.images_count}})</Link>
+                        <Link :href="route('realtor.listing.show', {listing: listing.id})" class="mt-2 block w-full btn-outline text-xs font-medium text-center">Offers ({{listing.offers_count}})</Link>
                     </div>
                 </section>
             </div>
-
         </Box>
     </section>
     <section v-if="listings.data.length" class="w-full flex justify-center mt-4 mb-4">
