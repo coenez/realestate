@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Listing;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ListingController extends Controller
 {
@@ -31,11 +32,13 @@ class ListingController extends Controller
     /**
      * Display the specified listing
      */
-    public function show(Listing $listing)
+    public function show(Listing $listing, Request $request)
     {
         $listing->load(['images']);
+
         return inertia('Listing/Show', [
-            'listing' => $listing
+            'listing' => $listing,
+            'offerMade' => Auth::user() ? $listing->offers()->byCurrentUser()->first() : null
         ]);
     }
 }
