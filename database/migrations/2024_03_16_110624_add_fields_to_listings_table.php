@@ -22,6 +22,7 @@ return new class extends Migration
             $table->tinyText('street_nr');
 
             $table->unsignedInteger('price');
+            $table->timestamp('sold_at')->nullable();
             $table->softDeletes();
         });
     }
@@ -32,7 +33,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('listings', function (Blueprint $table) {
-            $table->dropColumn(['beds', 'baths', 'area', 'city', 'code', 'street', 'street_nr', 'price']);
+            $table->dropColumn(['beds', 'baths', 'area', 'city', 'code', 'street', 'street_nr', 'price', 'sold_at']);
             $table->dropSoftDeletes();
         });
     }

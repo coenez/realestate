@@ -60,6 +60,14 @@ class Listing extends Model
         return $this->hasMany(Offer::class, 'listing_id');
     }
 
+    public function scopeWithoutSold(Builder $query): Builder
+    {
+//        return $query->doesntHave('offers')->orWhereHas('offers', function(Builder $query) {
+//            $query->whereNull('accepted_at')->whereNull('rejected_at');
+//        });
+        return $query->whereNull('sold_at');
+    }
+
     public function scopeFiltered(Builder $query, array $filters, array $sorter = []): Builder
     {
         foreach(self::FILTERS as $filterName => $properties) {

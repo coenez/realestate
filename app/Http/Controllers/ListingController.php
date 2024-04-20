@@ -24,6 +24,7 @@ class ListingController extends Controller
             'filters' => $filters,
             'listings' => Listing::latest()
                 ->filtered($filters)
+                ->withoutSold()
                 ->paginate(Listing::PAGE_SIZE)
                 ->withQueryString(),
         ]);
