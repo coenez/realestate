@@ -6,6 +6,7 @@ import ListingAddress from "../../Component/ListingAddress.vue";
 import {Link} from "@inertiajs/vue3";
 import RealtorFilters from "./Index/Components/RealtorFilters.vue";
 import Pagination from "../../Component/UI/Pagination.vue";
+import EmptyState from "../../Component/UI/EmptyState.vue";
 
 defineProps({
     listings: Object,
@@ -19,7 +20,7 @@ defineProps({
     <section>
         <RealtorFilters :filters="filters" :sorter="sorter"/>
     </section>
-    <section class="grid grid-cols-1 lg: grid-cols-2 gap-2">
+    <section v-if="listings.data.length" class="grid grid-cols-1 lg: grid-cols-2 gap-2">
         <Box v-for="listing in listings.data" :key="listing.id" :class="{'border-dashed': listing.deleted_at}">
             <div class="flex flex-col md:flex-row gap-2 md:items-center justify-between">
                 <div :class="{'opacity-25': listing.deleted_at}">
@@ -46,6 +47,7 @@ defineProps({
             </div>
         </Box>
     </section>
+    <EmptyState v-else>No listings yet</EmptyState>
     <section v-if="listings.data.length" class="w-full flex justify-center mt-4 mb-4">
         <Pagination :links="listings.links" />
     </section>
