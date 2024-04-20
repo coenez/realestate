@@ -12,9 +12,6 @@
     const difference = computed(() => props.offer.amount - props.price);
 
     const madeOn = computed(() => new Date(props.offer.created_at).toDateString());
-
-    console.log(props.offer);
-
 </script>
 
 <template>
@@ -24,11 +21,11 @@
             <div>
                 <Price :price="offer.amount" class="text-xl" />
                 <div class="text-gray-500">Difference <Price :price="difference" /></div>
-                <div class="text-gray-500 text-sm">Made by John Doe</div>
+                <div class="text-gray-500 text-sm">Made by {{offer.user.name}}</div>
                 <div class="text-gray-500 text-sm">Made on {{ madeOn }}</div>
             </div>
             <div>
-                <Link class="btn-outline text-xs font-medium" as="button">Accept</Link>
+                <Link :href="route('realtor.offer.accept', {offer: offer.id})" method="put" class="btn-outline text-xs font-medium" as="button">Accept</Link>
             </div>
         </section>
     </Box>
