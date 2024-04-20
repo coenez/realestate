@@ -38,7 +38,6 @@ class RealtorListingController extends Controller
         return inertia('Realtor/Create');
     }
 
-
     public function store(Request $request)
     {
         $request->user()->listings()->create($request->validate(Listing::VALIDATIONS));
