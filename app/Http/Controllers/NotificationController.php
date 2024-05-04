@@ -12,9 +12,4 @@ class NotificationController extends Controller
             'notifications' => $request->user()->notifications()->paginate(10)
         ]);
     }
-
-    public function show()
-    {
-
-    }
 }

@@ -15,8 +15,6 @@ class Listing extends Model
 
     protected $fillable = ['beds', 'baths', 'area', 'city', 'code', 'street', 'street_nr', 'price'];
 
-    private array $validations = [];
-
     public const VALIDATIONS = [
         'beds' => 'required|integer|min:0|max:20',
         'baths' => 'required|integer|min:0|max:20',

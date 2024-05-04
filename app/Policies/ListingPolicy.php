@@ -32,7 +32,7 @@ class ListingPolicy
      */
     public function view(?User $user, Listing $listing): bool
     {
-        return $listing->user_id === $user?->id ||$listing->sold_at === null;
+        return $listing->user_id === $user?->id || $listing->sold_at === null;
     }
 
     /**
